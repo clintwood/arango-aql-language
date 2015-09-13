@@ -1,0 +1,22 @@
+{
+  "name": "arango-aql-language",
+  "version": "0.1.0",
+  "description": "ArangoDB AQL Language Support in Atom",
+  "author": {
+    "name": "Clinton Wood",
+    "email": "clintwood@anotherway.co.za"
+  },
+  "keywords": [
+    "aql",
+    "arangodb",
+    "arango query language",
+    "query",
+    "language",
+    "syntax"
+  ],
+  "repository": "https://github.com/clintwood/arango-aql-language",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  }
+}

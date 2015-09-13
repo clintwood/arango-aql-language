@@ -1,0 +1,202 @@
+'fileTypes': [
+  'aql'
+]
+'name': 'AQL'
+'patterns': [
+  {
+    'include': '#comments'
+  }
+  {
+    'include': '#modifiers'
+  }
+  {
+    'include': '#functions'
+  }
+  {
+    'include': '#strings'
+  }
+  # {
+  #   'include': '#function-params'
+  # }
+]
+'repository':
+  'constant':
+    'match': '\\b(?:true|false|null)\\b'
+    'name': 'constant.language.json'
+  'number':
+    'comment': 'handles integer and decimal numbers'
+    'match': '\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b'
+    'name': 'constant.numeric.json'
+  'modifiers':
+    'comment': 'modifiers'
+    'match': '\\b(for|in|let|filter|sort|return|update|with|insert|remove|collect|limit|asc|desc|into|not|and|or|null|true|false|options|FOR|IN|LET|FILTER|SORT|RETURN|UPDATE|WITH|INSERT|REMOVE|COLLECT|LIMIT|ASC|DESC|INTO|NOT|AND|OR|NULL|TRUE|FALSE|OPTIONS)\\b'
+    'name': 'constant.language.json'
+
+  'functions':
+    'patterns': [
+      {
+        'match': '\\b(to_bool|to_number|to_string|to_list|is_null|is_bool|is_number|is_string|is_list|is_document|TO_BOOL|TO_NUMBER|TO_STRING|TO_LIST|IS_NULL|IS_BOOL|IS_NUMBER|IS_STRING|IS_LIST|IS_DOCUMENT)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(concat|concat_separator|char_length|lower|upper|substitute|substring|left|right|trim|ltrim|rtrim|split|reverse|contains|find_first|find_last|like|CONCAT|CONCAT_SEPARATOR|CHAR_LENGTH|LOWER|UPPER|SUBSTITUTE|SUBSTRING|LEFT|RIGHT|TRIM|LTRIM|RTRIM|SPLIT|REVERSE|CONTAINS|FIND_FIRST|FIND_LAST|LIKE)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(floor|ceil|round|abs|sqrt|rand|FLOOR|CEIL|ROUND|ABS|SQRT|RAND)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(date_timestamp|date_iso8601|date_dayofweek|date_year|date_month|date_day|date_hour|date_minute|date_second|date_millisecond|date_now|DATE_TIMESTAMP|DATE_ISO8601|DATE_DAYOFWEEK|DATE_YEAR|DATE_MONTH|DATE_DAY|DATE_HOUR|DATE_MINUTE|DATE_SECOND|DATE_MILLISECOND|DATE_NOW)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(length|flatten|min|max|average|sum|median|percentile|variance_population|variance_sample|stddev_population|stddev_sample|reverse|first|last|nth|position|slice|unique|union|union_distinct|minus|intersection|LENGTH|FLATTEN|MIN|MAX|AVERAGE|SUM|MEDIAN|PERCENTILE|VARIANCE_POPULATION|VARIANCE_SAMPLE|STDDEV_POPULATION|STDDEV_SAMPLE|REVERSE|FIRST|LAST|NTH|POSITION|SLICE|UNIQUE|UNION|UNION_DISTINCT|MINUS|INTERSECTION|append|push|unshift|pop|shift|remove_value|remove_values|remove_nth|APPEND|PUSH|UNSHIFT|POP|SHIFT|REMOVE_VALUE|REMOVE_VALUES|REMOVE_NTH)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(matches|merge|merge_recursive|translate|has|attributes|values|zip|unset|keep|parse_identifier|MATCHES|MERGE|MERGE_RECURSIVE|TRANSLATE|HAS|ATTRIBUTES|VALUES|ZIP|UNSET|KEEP|PARSE_IDENTIFIER)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(near|within|within_rectangle|is_in_polygon|NEAR|WITHIN|WITHIN_RECTANGLE|IS_IN_POLYGON)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(fulltext|FULLTEXT)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(graph_paths|graph_traversal|graph_traversal_tree|graph_shortest_path|graph_neighbors|GRAPH_PATHS|GRAPH_TRAVERSAL|GRAPH_TRAVERSAL_TREE|GRAPH_SHORTEST_PATH|GRAPH_NEIGHBORS)\\b'
+        'name': 'entity.name.function.aql'
+      }
+      {
+        'match': '\\b(not_null|first_list|first_document|collections|current_user|document|skiplist|not_null|FIRST_LIST|FIRST_DOCUMENT|COLLECTIONS|CURRENT_USER|DOCUMENT|SKIPLIST|call|apply|CALL|APPLY)\\b'
+        'name': 'entity.name.function.aql'
+      }
+    ]
+  'strings':
+    'patterns': [
+      {
+        'begin': '\''
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.js'
+        'end': '\''
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.js'
+        'name': 'string.quoted.single.js'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.js'
+          }
+          {
+            'match': "[^']*[^\\n\\r'\\\\]$"
+            'name': 'invalid.illegal.string.js'
+          }
+        ]
+      }
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.js'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.js'
+        'name': 'string.quoted.double.js'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.js'
+          }
+          {
+            'match': '[^"]*[^\\n\\r"\\\\]$'
+            'name': 'invalid.illegal.string.js'
+          }
+        ]
+      }
+      {
+        'begin': '`'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.js'
+        'end': '`'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.js'
+        'name': 'string.quoted.template.js'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.js'
+          }
+          {
+            'include': '#interpolated_js'
+          }
+        ]
+      }
+    ]
+  # 'function-params':
+  #   'patterns': [
+  #     {
+  #       'include': '#numbers'
+  #     }
+  #     {
+  #       'include': '#strings'
+  #     }
+  #     {
+  #       'match': '\\(|\\)'
+  #       'name': 'meta.brace.round.js'
+  #     }
+  #     {
+  #       'match': '\\[|\\]'
+  #       'name': 'meta.brace.square.js'
+  #     }
+  #     {
+  #       'match': '\\{|\\}'
+  #       'name': 'meta.brace.curly.js'
+  #     }
+  #     {
+  #       'match': ','
+  #       'name': 'meta.object.delimiter.js'
+  #     }
+  #     {
+  #       'match': '='
+  #       'name': 'keyword.operator.js'
+  #     }
+  #     {
+  #       'include': '#comments'
+  #     }
+  #     {
+  #       'match': '[a-zA-Z_$][a-zA-Z_$0-9]*'
+  #       'name': 'variable.parameter.function.js'
+  #     }
+  #   ]
+  'comments':
+    'patterns': [
+      {
+        'match': '//.*'
+        'name': 'comment.single.json'
+      }
+      {
+        'begin': '/\\*\\*(?!/)'
+        'captures':
+          '0':
+            'name': 'punctuation.definition.comment.json'
+        'end': '\\*/'
+        'name': 'comment.block.documentation.json'
+      }
+      {
+        'begin': '/\\*'
+        'captures':
+          '0':
+            'name': 'punctuation.definition.comment.json'
+        'end': '\\*/'
+        'name': 'comment.block.json'
+      }
+    ]
+'scopeName': 'source.aql'
